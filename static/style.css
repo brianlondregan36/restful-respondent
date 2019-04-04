@@ -1,0 +1,154 @@
+body {
+  margin:0;
+}
+*:focus {
+  outline-color:#4682B4;
+}
+
+
+.header, .footer {
+  width:100%;
+  height:3em;
+  padding-top:20px;
+  text-align:center;
+  background-color:#EDEEF3;
+}
+
+
+.toaster {
+  position:fixed;
+  visibility:hidden;
+  top:-100px;
+  right:25%;
+  left:25%;
+  width:50%;
+  padding:10px;
+  border-bottom-left-radius:10px;
+  border-bottom-right-radius:10px;
+  background:#4682B4;
+  color:#FFFFFF;
+  font-family:sans-serif;
+  font-weight:bold;
+  word-break:break-word;
+  transition:top 1.5s ease-in-out;
+}
+.toaster--show {
+  visibility:visible;
+  top: 0px;
+}
+
+
+
+.section {
+  margin-left:2%;
+  margin-right:2%;
+  font-family:sans-serif;
+  font-size:1em;
+}
+.section__row {
+  display:flex;
+  flex-flow:row wrap;
+  justify-content:space-evenly;
+  margin-top:38px;
+  margin-bottom:28px;
+}
+.section__title {
+  color:#4682B4;
+}
+.section__text {
+  font-size:1.2em;
+}
+.section__message--error {
+  color:#AD0707;
+}
+
+
+.clientform {
+  flex-basis:40%;
+  min-width:290px;
+  margin-top:8px;
+  margin-bottom:18px;
+  padding:10px;
+  border:2px #4682B4 solid;
+  border-radius:4px;
+  overflow:hidden;
+}
+.clientform__overlay {
+  width:100%;
+  height:100%;
+  display:none;
+  background:url('https://sustainabledevelopment.un.org/content/images/image18_708.jpg');
+  background-size:50% 40%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.clientform fieldset {
+  border:none;
+}
+.clientform__radiogroup {
+  padding:2px;
+}
+.clientform__radiogroup--error {
+  border:2px dashed #FF6666;
+}
+.clientform__radio {
+  display:block;
+  position:relative;
+  margin:0.5em;
+  padding-left:24px;
+  border:thin transparent solid;
+}
+.clientform__radio::before, .clientform__radio::after {
+  display:block;
+  position:absolute;
+  border-radius:50%;
+  content:'';
+}
+.clientform__radio::before {
+  top:0;
+  left:0;
+  width:14px;
+  height:14px;
+  border:1px solid #000;
+  background:#fff;
+}
+.clientform__radio--selected::after {
+  top:3px;
+  left:3px;
+  border:5px solid #DAA520;
+  content:'';
+}
+.clientform__text {
+  font-family:monospace;
+  font-size:1.2em;
+}
+.clientform__text--error {
+  background-color:#FF6666;
+}
+.clientform__button {
+  display:block;
+  width:30%;
+  min-width:120px;
+  margin-top:20px;
+  margin-right:auto;
+  margin-left:auto;
+  padding:10px;
+  border: none;
+  border-radius:4px;
+  background-color:#4682B4;
+  color:#FFFFFF;
+  font-size:1.05em;
+  font-weight:bold;
+}
+
+
+.subsection {
+  flex-basis:30%;
+  min-width:220px;
+  margin-top:8px;
+  margin-bottom:18px;
+  padding:10px;
+}
+.subsection__inner {
+  font-weight:bold;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Respondent REST API</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+
+<body>
+  <header class="header">
+
+  </header>
+
+  <div id="toaster" class="toaster" aria-live="polite">{{ result }}</div>
+
+  <main>
+    <section aria-labelledby="title1" class="section">
+
+      <h1 id="title1" class="section__title">Lorem ipsum dolor sit amet</h1>
+      <div class="section__text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue mauris nec erat posuere maximus. Quisque ultricies ligula viverra, porttitor felis vitae, tincidunt metus. Aenean consectetur placerat ipsum, eu vestibulum tellus ornare nec. Pellentesque vitae erat a velit finibus euismod sit amet at ante. Proin mollis placerat turpis, ac sollicitudin mi finibus ac.</p>
+        <p>Duis lacus ex, porta quis congue quis, varius id velit. Proin suscipit dolor tellus, ac porta erat ornare id. Aenean mi massa, ultricies vel condimentum sit amet, faucibus et ex. Donec at dignissim dui. Etiam venenatis quis massa sit amet convallis. Vivamus a ligula vel nulla sollicitudin ornare ac et lorem. Phasellus consectetur justo vitae urna laoreet congue.</p>
+      </div>
+
+      <div class="section__row">
+        <div role="form" class="clientform" aria-labelledby="lbl1">
+          <div class="clientform__overlay"></div>
+          <fieldset>
+            <h1 id="lbl1">Proin suscipit dolor tellus</h1>
+            <h3 id="lbl2" class="clientform__label">Morbi at consequat nisl</h3>
+            <div role="radiogroup" id="rdg1" class="clientform__radiogroup js-clientform__radiogroup" aria-labelledby="lbl2" aria-required="true">
+              <div role="radio" data-options="1" class="clientform__radio" aria-checked="false" tabindex="0">Pellentesque interdum </div>
+              <div role="radio" data-options="2" class="clientform__radio" aria-checked="false" tabindex="-1">Curabitur condimentum</div>
+            </div>
+            <div id="err1"></div>
+
+            <h3 id="lbl3" class="clientform__label">Praesent pharetra posuere lacus</h3>
+            <input type="text" id="txt1" class="clientform__text" aria-labelledby="lbl3" aria-required="true" maxlength="30">
+            <div id="err2"></div>
+
+            <button type="button" id="btn1" class="clientform__button js-clientform__button">Pellentesque</button>
+          </fieldset>
+        </div>
+
+        <div class="subsection">
+          <h3>Quisque laoreet</h3>
+          <p>Vestibulum imperdiet, est a varius sagittis, nisi dui interdum ex, non tincidunt ligula metus eget mi. Aenean ultricies nisi id lacus aliquam, non tempus dui tempus. Ut faucibus sapien et maximus pr
+etium. Nunc elit orci, aliquam eu dolor pulvinar, imperdiet posuere ex. In vitae ullamcorper diam. Duis fringilla suscipit est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a lorem a nibh fauci
+bus consequat.</p>
+          <div class="subsection__inner">
+            <p>Nulla enim nulla, sodales a lorem quis, tincidunt hendrerit dolor.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    Aenean consectetur placerat ipsum, eu vestibulum tellus ornare nec.
+  </footer>
+
+
+  <script src="{{ url_for('static', filename='clientform.js') }}"></script>
+</body>
+</html>
