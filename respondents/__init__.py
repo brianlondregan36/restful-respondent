@@ -1,5 +1,5 @@
 from flask import Flask
 app = Flask(__name__)
 
-import respondents.views
-import respondents.passwords
+from .respondents import respondents.views
+from .respondents import respondents.passwords
