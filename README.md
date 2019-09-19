@@ -4,7 +4,6 @@
 
 "views.py" under the "respondents" folder has the API calls. 
 The page markup is under "templates" folder and javascript is under "static" folder. 
-I deployed and hosted the application using Heroku. 
 
 ### 6/13/19 --- 
 
