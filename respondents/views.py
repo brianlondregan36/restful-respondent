@@ -1,5 +1,5 @@
 from respondents import app
-from respondents.passwords import clientid, clientsecret
+from respondents.passwords import us_clientid, us_clientsecret, testlab_clientid, testlab_clientsecret
 from flask import Flask, render_template, request
 from flask_cors import CORS
 import base64, json, requests
