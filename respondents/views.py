@@ -9,11 +9,12 @@ import base64, json, requests
 def index():
     url = GetAuthEndpoint("testlab")
     access_token = ConfirmitAuthenticate(url)
+    print(str(access_token))
     req = requests.get('https://ws.testlab.firmglobal.net/v1/surveys/p10210620', headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
+    desc, result = None, ""
     if req.status_code == 200:
         respText = json.loads(req.text)
         desc = respText["description"]
-    result = ""
     if desc is not None:
         result = "Survey Description: " + desc
     return render_template('index.html', result=result)
@@ -47,6 +48,7 @@ def CreateSurveyResponse():
 def practice(site):
     url = GetAuthEndpoint(site)
     access_token = ConfirmitAuthenticate(url)
+    print(str(access_token))
     return render_template('practice.html')
 
 
