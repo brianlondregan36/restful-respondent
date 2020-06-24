@@ -46,7 +46,10 @@ def CreateSurveyResponse():
 
 @app.route('/Practice/<site>', methods=['GET'])
 def practice(site):
+    print("the site is")
+    print(site)
     url = GetAuthEndpoint(site)
+    print(url)
     access_token = ConfirmitAuthenticate(url)
     print(str(access_token))
     return render_template('practice.html')
@@ -65,12 +68,16 @@ def GetAuthEndpoint(site):
 
 def ConfirmitAuthenticate(url):
     grant_scope = {"grant_type": "api-user", "scope": "pub.surveys pub.hubs"}
+    print("I am in ConfirmitAuthenticate")
+    print(url)
+    print(str(clientid))
     req = requests.post(url, data=grant_scope, auth=(clientid, clientsecret))
     if req.status_code == 200:
         respText = json.loads(req.text)
         access_token = respText["token_type"] + " " + respText["access_token"]
         return access_token
     else:
+        print(str(req.status_code))
         return None
 
 
