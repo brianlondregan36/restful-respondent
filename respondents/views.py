@@ -7,9 +7,7 @@ import base64, json, requests
 
 @app.route('/', methods=['GET'])
 def index():
-    url = GetAuthEndpoint("testlab")
-    access_token = ConfirmitAuthenticate(url)
-    print(str(access_token))
+    access_token = ConfirmitAuthenticate("testlab")
     req = requests.get('https://ws.testlab.firmglobal.net/v1/surveys/p10210620', headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     desc, result = None, ""
     if req.status_code == 200:
@@ -25,8 +23,7 @@ def CreateSurveyResponse():
     email = request.form['email']
     if options is not None and email is not None:
         respValues = {"email": email, "options": options}
-        url = GetAuthEndpoint("testlab")
-        access_token = ConfirmitAuthenticate(url)
+        access_token = ConfirmitAuthenticate("testlab")
         req = requests.post('https://ws.testlab.firmglobal.net/v1/surveys/p10210620/respondents',
                          data = json.dumps(respValues),
                          headers = {"Content-Type": "application/json", "Accept": "application/json", "authorization": access_token}
@@ -46,11 +43,7 @@ def CreateSurveyResponse():
 
 @app.route('/Practice/<site>', methods=['GET'])
 def practice(site):
-    print("the site is")
-    print(site)
-    url = GetAuthEndpoint(site)
-    print(url)
-    access_token = ConfirmitAuthenticate(url)
+    access_token = ConfirmitAuthenticate(site)
     print(str(access_token))
     return render_template('practice.html')
 
@@ -58,25 +51,25 @@ def practice(site):
 
 
 
-def GetAuthEndpoint(site):
+def ConfirmitAuthenticate(site):
+    authEndpoint = ""
     if site == "us" or site == "euro" or site == "nordic":
-        return "https://idp." + site + ".confirmit.com/identity/connect/authorize"
+        authEndpoint = "https://idp." + site + ".confirmit.com/identity/connect/authorize"
     elif site == "testlab":
-        return "https://idp.testlab.firmglobal.net/identity/connect/authorize"
-    else:
-        return None
-
-def ConfirmitAuthenticate(url):
+        authEndpoint = "https://idp.testlab.firmglobal.net/identity/connect/authorize"
     grant_scope = {"grant_type": "api-user", "scope": "pub.surveys pub.hubs"}
-    print("I am in ConfirmitAuthenticate")
-    print(url)
-    print(str(clientid))
-    req = requests.post(url, data=grant_scope, auth=(clientid, clientsecret))
+    this_clientid = site + "_clientid"
+    this_clientsecret = site + "_clientsecret"
+    print(this_clientid)
+    print(this_clientsecret)
+    print(authEndpoint)
+    req = requests.post(url, data=grant_scope, auth=(this_clientid, this_clientsecret))
     if req.status_code == 200:
         respText = json.loads(req.text)
         access_token = respText["token_type"] + " " + respText["access_token"]
         return access_token
     else:
+        print(str(requests.exceptions.RequestException))
         print(str(req.status_code))
         return None
 
