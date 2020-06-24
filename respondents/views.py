@@ -1,5 +1,5 @@
 from respondents import app
-from respondents.passwords import us_clientid, us_clientsecret, testlab_clientid, testlab_clientsecret
+from respondents.passwords import *
 from flask import Flask, render_template, request
 from flask_cors import CORS
 import base64, json, requests
@@ -44,7 +44,6 @@ def CreateSurveyResponse():
 @app.route('/Practice/<site>', methods=['GET'])
 def practice(site):
     access_token = ConfirmitAuthenticate(site)
-    print(str(access_token))
     return render_template('practice.html')
 
 
@@ -52,25 +51,28 @@ def practice(site):
 
 
 def ConfirmitAuthenticate(site):
-    authEndpoint = ""
-    if site == "us" or site == "euro" or site == "nordic":
-        authEndpoint = "https://idp." + site + ".confirmit.com/identity/connect/authorize"
+    grant_scope = {"grant_type": "api-user", "scope": "pub.surveys pub.hubs"}
+    if site == "us":  
+        authEndpoint = "https://idp.us.confirmit.com/identity/connect/authorize"
+        req = requests.post(authEndpoint, data=grant_scope, auth=(us_clientid, us_clientsecret))
+    elif site == "euro":
+        authEndpoint = "https://idp.euro.confirmit.com/identity/connect/authorize"
+        req = requests.post(authEndpoint, data=grant_scope, auth=(euro_clientid, euro_clientsecret))
+    elif site == "nordic":
+        authEndpoint = "https://idp.nordic.confirmit.com/identity/connect/authorize"
+        req = requests.post(authEndpoint, data=grant_scope, auth=(nordic_clientid, nordic_clientsecret))
     elif site == "testlab":
         authEndpoint = "https://idp.testlab.firmglobal.net/identity/connect/authorize"
-    grant_scope = {"grant_type": "api-user", "scope": "pub.surveys pub.hubs"}
-    this_clientid = site + "_clientid"
-    this_clientsecret = site + "_clientsecret"
-    print(this_clientid)
-    print(this_clientsecret)
-    print(authEndpoint)
-    req = requests.post(authEndpoint, data=grant_scope, auth=(this_clientid, this_clientsecret))
+        req = requests.post(authEndpoint, data=grant_scope, auth=(testlab_clientid, testlab_clientsecret))
+    
     if req.status_code == 200:
         respText = json.loads(req.text)
         access_token = respText["token_type"] + " " + respText["access_token"]
+        print(str(access_token))
         return access_token
     else:
-        print(str(requests.exceptions.RequestException))
         print(str(req.status_code))
+        print(str(requests.exceptions.RequestException))
         return None
 
 
