@@ -41,6 +41,12 @@ def CreateSurveyResponse():
         #client-side error
         return None
 
+@app.route('/Practice', methods=['GET'])
+def practice(): 
+    access_token = ConfirmitAuthenticate()
+    return render_template('practice.html')
+
+
 
 
 def ConfirmitAuthenticate():

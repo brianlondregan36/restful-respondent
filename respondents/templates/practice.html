@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmit Public REST API - Surveys API</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+    <br>
+    <div>
+	<p><strong>Surveys</strong>: Everything concerning surveys.</p>
+	<pre>
+            GET /v1/surveys/
+	    GET /v1/surveys/{surveyId}
+	</pre>
+	<p><strong>Respondents</strong>: Everything concerning respondents.</p>
+	<pre>
+	    GET+POST+PATCH   /v1/surveys/{surveyId}/respondents
+	    GET+DELETE+PATCH /v1/surveys/{surveyId}/respondents/{respid}
+	</pre>
+	<p><strong>Survey Data</strong>: Everything concerning survey data reading.</p>
+	<pre>
+	    GET /v1/surveys/{surveyId}/responses/schema
+	    GET /v1/surveys/{surveyId}/responses/data
+	</pre>
+	<p><strong>Variables</strong>: Everything concerning respondent variables.</p>
+	<pre>
+            GET+POST /v1/surveys/{surveyId}/variables
+	    GET      /v1/surveys/{surveyId}/variables/{name}
+	</pre>
+    </div> 
+</body>
+</html>
