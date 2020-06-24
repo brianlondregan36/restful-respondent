@@ -7,7 +7,8 @@ import base64, json, requests
 
 @app.route('/', methods=['GET'])
 def index():
-    access_token = ConfirmitAuthenticate()
+    url = GetAuthEndpoint("testlab")
+    access_token = ConfirmitAuthenticate(url)
     req = requests.get('https://ws.testlab.firmglobal.net/v1/surveys/p10210620', headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     if req.status_code == 200:
         respText = json.loads(req.text)
@@ -23,7 +24,8 @@ def CreateSurveyResponse():
     email = request.form['email']
     if options is not None and email is not None:
         respValues = {"email": email, "options": options}
-        access_token = ConfirmitAuthenticate()
+        url = GetAuthEndpoint("testlab")
+        access_token = ConfirmitAuthenticate(url)
         req = requests.post('https://ws.testlab.firmglobal.net/v1/surveys/p10210620/respondents',
                          data = json.dumps(respValues),
                          headers = {"Content-Type": "application/json", "Accept": "application/json", "authorization": access_token}
@@ -41,24 +43,37 @@ def CreateSurveyResponse():
         #client-side error
         return None
 
-@app.route('/Practice', methods=['GET'])
-def practice(): 
-    access_token = ConfirmitAuthenticate()
+@app.route('/Practice/<site>', methods=['GET'])
+def practice(site):
+    url = GetAuthEndpoint(site)
+    access_token = ConfirmitAuthenticate(url)
     return render_template('practice.html')
 
 
 
 
-def ConfirmitAuthenticate():
-    endpoint = "https://author.testlab.firmglobal.net/identity/connect/token"
+
+def GetAuthEndpoint(site):
+    if site == "us" or site == "euro" or site == "nordic":
+        return "https://idp." + site + ".confirmit.com/identity/connect/authorize"
+    elif site == "testlab":
+        return "https://idp.testlab.firmglobal.net/identity/connect/authorize"
+    else:
+        return None
+
+def ConfirmitAuthenticate(url):
     grant_scope = {"grant_type": "api-user", "scope": "pub.surveys pub.hubs"}
-    req = requests.post(endpoint, data=grant_scope, auth=(clientid, clientsecret))
+    req = requests.post(url, data=grant_scope, auth=(clientid, clientsecret))
     if req.status_code == 200:
         respText = json.loads(req.text)
         access_token = respText["token_type"] + " " + respText["access_token"]
         return access_token
     else:
         return None
+
+
+
+
 
 def GetRespondentLink(url, token):
     url = url + "?includeSurveyLink=true"
