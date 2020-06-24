@@ -63,7 +63,7 @@ def ConfirmitAuthenticate(site):
     print(this_clientid)
     print(this_clientsecret)
     print(authEndpoint)
-    req = requests.post(url, data=grant_scope, auth=(this_clientid, this_clientsecret))
+    req = requests.post(authEndpoint, data=grant_scope, auth=(this_clientid, this_clientsecret))
     if req.status_code == 200:
         respText = json.loads(req.text)
         access_token = respText["token_type"] + " " + respText["access_token"]
