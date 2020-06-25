@@ -64,15 +64,11 @@ def ConfirmitAuthenticate(site):
     elif site == "testlab":
         authEndpoint = "https://idp.testlab.firmglobal.net/identity/connect/token"
         req = requests.post(authEndpoint, data=grant_scope, auth=(testlab_clientid, testlab_clientsecret))
-    
     if req.status_code == 200:
         respText = json.loads(req.text)
         access_token = respText["token_type"] + " " + respText["access_token"]
-        print(str(access_token))
         return access_token
     else:
-        print(str(req.status_code))
-        print(str(requests.exceptions.RequestException))
         return None
 
 
