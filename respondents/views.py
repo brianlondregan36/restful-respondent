@@ -55,7 +55,7 @@ def PracticeWithActions(site):
     
     root = "https://ws." + site + ".confirmit.com" if site == "us" or site == "euro" or site == "nordic" else "https://ws.testlab.firmglobal.net"
     path = "/v1/surveys/p827434659274"
-    endpoint = root + resource
+    endpoint = root + path
     
     req = requests.get(endpoint, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     
