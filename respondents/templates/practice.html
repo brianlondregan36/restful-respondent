@@ -9,15 +9,24 @@
     body { margin-left: 14px; margin-top: 14px; }
     ol { padding-bottom: 10px; }
     li { padding-bottom: 4px; }
-    .container { display: flex; }
-    .section { }
+    .container { 
+      display: flex; 
+      flex-wrap: wrap; 
+    }
+    .section { 
+      max-width: 530px; 
+      min-width: 200px; 
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
-
+	  
+    <h1>Confirmit Public REST API - Surveys API</h1>   
+    
     <div id="info1" class="section">
+	<h2>Verbs and Resources</h2>
 	<p><strong>Surveys</strong>: Everything concerning surveys.</p>
 	<pre>
             GET /v1/surveys/
@@ -43,22 +52,22 @@
     <div id="info2" class="section">
 	<h2>End Points</h2>
 	<ul>
-        <li>US</li>
+          <li>US</li>
 	    <ol>
               <li>https://idp.us.confirmit.com/identity/connect/token</li>
 	      <li>https://ws.us.confirmit.com/</li>
 	    </ol>
-	<li>EURO</li>
+	  <li>EURO</li>
 	    <ol>
               <li>https://idp.euro.confirmit.com/identity/connect/token</li>
 	      <li>https://ws.euro.confirmit.com/</li>
 	    </ol>
-	 <li>NORDIC</li>
+	  <li>NORDIC</li>
 	    <ol>
 	      <li>https://idp.nordic.confirmit.com/identity/connect/token</li>
 	      <li>https://ws.nordic.confirmit.com/</li>
 	    </ol>
-	 <li>TESTLAB</li>
+	  <li>TESTLAB</li>
 	    <ol>
 	      <li>https://idp.testlab.firmglobal.net/identity/connect/token</li>
 	      <li>https://ws.testlab.firmglobal.net</li>
@@ -67,11 +76,11 @@
     </div>
 
     <div id="info3" class="section">
-	    <h2>TEST RESULTS</h2>
-	    <div><p><strong>Request</strong></p></div>
-	    <pre>{{ result[0] }}</pre>
-	    <div><p><strong>Response</strong></p></div>
-	    <pre>{{ result[1] }}</pre>
+	<h2>Test Results</h2>
+	<div><p><strong>Request</strong></p></div>
+	<p style="font-family: monospace;">{{ result[0] }}</p>
+	<div><p><strong>Response</strong></p></div>
+	<p style="font-family: monospace;">{{ result[1] }}</p>
     </div>
 
   </div>
