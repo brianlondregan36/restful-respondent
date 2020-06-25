@@ -12,6 +12,7 @@ import base64, json, requests
 @app.route('/', methods=['GET'])
 def Index():
     access_token = ConfirmitAuthenticate("testlab")
+    print(access_token)
     req = requests.get('https://ws.testlab.firmglobal.net/v1/surveys/p10210620', headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     desc, result = None, ""
     if req.status_code == 200:
