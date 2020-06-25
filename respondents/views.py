@@ -47,12 +47,22 @@ def CreateSurveyResponse():
 
 @app.route('/Practice', methods=['GET'])
 def Practice(): 
-    return render_template('practice.html')
+    return render_template('practice.html', result=["",""])
 
 @app.route('/Practice/<site>', methods=['GET'])
 def PracticeWithActions(site):
     access_token = ConfirmitAuthenticate(site)
-    return render_template('practice.html')
+    
+    root = "https://ws." + site + ".confirmit.com" if site == "us" or site == "euro" or site == "nordic" else "https://ws.testlab.firmglobal.net"
+    path = "/v1/surveys/p827434659274"
+    endpoint = root + resource
+    
+    req = requests.get(endpoint, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
+    
+    requestDesc = "GET " + endpoint + " using access token " + access_token
+    responseDesc = str(req.status_code) + ": " + str(req.text)
+    
+    return render_template('practice.html', result=[requestDesc, responseDesc])
 
 
 

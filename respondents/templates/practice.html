@@ -8,11 +8,16 @@
   <style>
     body { margin-left: 14px; margin-top: 14px; }
     ol { padding-bottom: 10px; }
+    li { padding-bottom: 4px; }
+    .container { display: flex; }
+    .section { }
   </style>
 </head>
 
 <body>
-    <div>
+  <div class="container">
+
+    <div id="info1" class="section">
 	<p><strong>Surveys</strong>: Everything concerning surveys.</p>
 	<pre>
             GET /v1/surveys/
@@ -33,10 +38,10 @@
             GET+POST /v1/surveys/{surveyId}/variables
 	    GET      /v1/surveys/{surveyId}/variables/{name}
 	</pre>
-    </div> 
-    <br>
-    <div>
-	<p><strong>End Points</strong></p>
+    </div>
+
+    <div id="info2" class="section">
+	<h2>End Points</h2>
 	<ul>
         <li>US</li>
 	    <ol>
@@ -60,6 +65,15 @@
 	    </ol>
 	</ul>
     </div>
-    <br><br>
+
+    <div id="info3" class="section">
+	    <h2>TEST RESULTS</h2>
+	    <div><p><strong>Request</strong></p></div>
+	    <pre>{{ result[0] }}</pre>
+	    <div><p><strong>Response</strong></p></div>
+	    <pre>{{ result[1] }}</pre>
+    </div>
+
+  </div>
 </body>
 </html>
