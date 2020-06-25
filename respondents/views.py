@@ -19,6 +19,7 @@ def Index():
         desc = respText["description"]
     if desc is not None:
         result = "Survey Description: " + desc
+    print("result is " + result)
     return render_template('index.html', result=result)
 
 @app.route('/Response', methods=['POST'])
@@ -40,7 +41,7 @@ def CreateSurveyResponse():
             result = {"surveyLink": surveyLink}
             return json.dumps(result)
         else:
-            return requests.exceptions.RequestException
+            return None
     else:
         #client-side error
         return None
@@ -51,17 +52,13 @@ def Practice():
 
 @app.route('/Practice/<site>', methods=['GET'])
 def PracticeWithActions(site):
-    access_token = ConfirmitAuthenticate(site)
-    
+    access_token = ConfirmitAuthenticate(site) 
     root = "https://ws." + site + ".confirmit.com" if site == "us" or site == "euro" or site == "nordic" else "https://ws.testlab.firmglobal.net"
     path = "/v1/surveys/p827434659274"
     endpoint = root + path
-    
     req = requests.get(endpoint, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
-    
     requestDesc = "GET " + endpoint + " using access token " + access_token
     responseDesc = str(req.status_code) + ": " + str(req.text)
-    
     return render_template('practice.html', result=[requestDesc, responseDesc])
 
 

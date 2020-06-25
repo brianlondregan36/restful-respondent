@@ -15,7 +15,8 @@
     }
     .section { 
       max-width: 530px; 
-      min-width: 200px; 
+      min-width: 200px;
+      padding: 10px;
     }
   </style>
 </head>
@@ -30,23 +31,23 @@
 	<h2>Verbs and Resources</h2>
 	<p><strong>Surveys</strong>: Everything concerning surveys.</p>
 	<pre>
-            GET /v1/surveys/
-	    GET /v1/surveys/{surveyId}
+        GET /v1/surveys/
+	GET /v1/surveys/{surveyId}
 	</pre>
 	<p><strong>Respondents</strong>: Everything concerning respondents.</p>
 	<pre>
-	    GET+POST+PATCH   /v1/surveys/{surveyId}/respondents
-	    GET+DELETE+PATCH /v1/surveys/{surveyId}/respondents/{respid}
+	GET+POST+PATCH   /v1/surveys/{surveyId}/respondents
+	GET+DELETE+PATCH /v1/surveys/{surveyId}/respondents/{respid}
 	</pre>
 	<p><strong>Survey Data</strong>: Everything concerning survey data reading.</p>
 	<pre>
-	    GET /v1/surveys/{surveyId}/responses/schema
-	    GET /v1/surveys/{surveyId}/responses/data
+	GET /v1/surveys/{surveyId}/responses/schema
+	GET /v1/surveys/{surveyId}/responses/data
 	</pre>
 	<p><strong>Variables</strong>: Everything concerning respondent variables.</p>
 	<pre>
-            GET+POST /v1/surveys/{surveyId}/variables
-	    GET      /v1/surveys/{surveyId}/variables/{name}
+        GET+POST /v1/surveys/{surveyId}/variables
+	GET      /v1/surveys/{surveyId}/variables/{name}
 	</pre>
     </div>
 
