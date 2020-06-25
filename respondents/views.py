@@ -5,8 +5,12 @@ from flask_cors import CORS
 import base64, json, requests
 
 
+
+
+'''ROUTING''' 
+
 @app.route('/', methods=['GET'])
-def index():
+def Index():
     access_token = ConfirmitAuthenticate("testlab")
     req = requests.get('https://ws.testlab.firmglobal.net/v1/surveys/p10210620', headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     desc, result = None, ""
@@ -41,14 +45,19 @@ def CreateSurveyResponse():
         #client-side error
         return None
 
+@app.route('/Practice', methods=['GET'])
+def Practice(): 
+    return render_template('practice.html')
+
 @app.route('/Practice/<site>', methods=['GET'])
-def practice(site):
+def PracticeWithActions(site):
     access_token = ConfirmitAuthenticate(site)
     return render_template('practice.html')
 
 
 
 
+'''REUSABLE FUNCTIONS'''
 
 def ConfirmitAuthenticate(site):
     grant_scope = {"grant_type": "api-user", "scope": "pub.surveys pub.hubs"}
@@ -71,10 +80,6 @@ def ConfirmitAuthenticate(site):
     else:
         return None
 
-
-
-
-
 def GetRespondentLink(url, token):
     url = url + "?includeSurveyLink=true"
     req = requests.get(url, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": token})
@@ -85,4 +90,3 @@ def GetRespondentLink(url, token):
         return surveyLink
     else:
         return None
-
