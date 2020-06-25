@@ -53,16 +53,16 @@ def practice(site):
 def ConfirmitAuthenticate(site):
     grant_scope = {"grant_type": "api-user", "scope": "pub.surveys pub.hubs"}
     if site == "us":  
-        authEndpoint = "https://idp.us.confirmit.com/identity/connect/authorize"
+        authEndpoint = "https://idp.us.confirmit.com/identity/connect/token"
         req = requests.post(authEndpoint, data=grant_scope, auth=(us_clientid, us_clientsecret))
     elif site == "euro":
-        authEndpoint = "https://idp.euro.confirmit.com/identity/connect/authorize"
+        authEndpoint = "https://idp.euro.confirmit.com/identity/connect/token"
         req = requests.post(authEndpoint, data=grant_scope, auth=(euro_clientid, euro_clientsecret))
     elif site == "nordic":
-        authEndpoint = "https://idp.nordic.confirmit.com/identity/connect/authorize"
+        authEndpoint = "https://idp.nordic.confirmit.com/identity/connect/token"
         req = requests.post(authEndpoint, data=grant_scope, auth=(nordic_clientid, nordic_clientsecret))
     elif site == "testlab":
-        authEndpoint = "https://idp.testlab.firmglobal.net/identity/connect/authorize"
+        authEndpoint = "https://idp.testlab.firmglobal.net/identity/connect/token"
         req = requests.post(authEndpoint, data=grant_scope, auth=(testlab_clientid, testlab_clientsecret))
     
     if req.status_code == 200:
