@@ -12,7 +12,6 @@ import base64, json, requests
 @app.route('/', methods=['GET'])
 def Index():
     access_token = ConfirmitAuthenticate("testlab")
-    print(access_token)
     req = requests.get('https://ws.testlab.firmglobal.net/v1/surveys/p10210620', headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     desc, result = None, ""
     if req.status_code == 200:
@@ -20,7 +19,6 @@ def Index():
         desc = respText["description"]
     if desc is not None:
         result = "Survey Description: " + desc
-    print("result is " + result)
     return render_template('index.html', result=result)
 
 @app.route('/Response', methods=['POST'])
@@ -47,11 +45,11 @@ def CreateSurveyResponse():
         #client-side error
         return None
 
-@app.route('/Practice', methods=['GET'])
+@app.route('/practice', methods=['GET'])
 def Practice(): 
     return render_template('practice.html', result=["",""])
 
-@app.route('/Practice/<site>', methods=['GET'])
+@app.route('/practice/<site>', methods=['GET'])
 def PracticeWithActions(site):
     access_token = ConfirmitAuthenticate(site) 
     root = "https://ws." + site + ".confirmit.com" if site == "us" or site == "euro" or site == "nordic" else "https://ws.testlab.firmglobal.net"
