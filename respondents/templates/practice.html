@@ -33,22 +33,23 @@
 	  
     <div id="info1" class="section">
 	<h2>Verbs and Resources</h2>
-	<p><strong>Surveys</strong>: Everything concerning surveys.</p>
+	<div><p>Reference the Confirmit Docs page for complete info. Confirmit Docs exists inside every Horizons site e.g. <a href="https://ws.nordic.confirmit.com/docs/public-apis/current/index.html" target="_blank">Nordic</a> or <a href="https://ws.us.confirmit.com/docs/public-apis/current/index.html" target="_blank">US</a> etc..</p></div>
+	<p><strong>Surveys</strong>: Everything concerning surveys. (GA)</p>
 	<pre>
  GET /v1/surveys/
  GET /v1/surveys/{surveyId}
 	</pre>
-	<p><strong>Respondents</strong>: Everything concerning respondents.</p>
+	<p><strong>Respondents</strong>: Everything concerning respondents. (GA)</p>
 	<pre>
  GET+POST+PATCH   /v1/surveys/{surveyId}/respondents
  GET+DELETE+PATCH /v1/surveys/{surveyId}/respondents/{respid}
 	</pre>
-	<p><strong>Survey Data</strong>: Everything concerning survey data reading.</p>
+	<p><strong>Survey Data</strong>: Everything concerning survey data reading. (LA)</p>
 	<pre>
  GET /v1/surveys/{surveyId}/responses/schema
  GET /v1/surveys/{surveyId}/responses/data
 	</pre>
-	<p><strong>Variables</strong>: Everything concerning respondent variables.</p>
+	<p><strong>Variables</strong>: Everything concerning respondent variables. (Preview?)</p>
 	<pre>
  GET+POST /v1/surveys/{surveyId}/variables
  GET      /v1/surveys/{surveyId}/variables/{name}
