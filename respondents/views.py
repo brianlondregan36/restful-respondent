@@ -51,9 +51,11 @@ def Practice():
 
 @app.route('/practice/<site>', methods=['GET'])
 def PracticeWithActions(site):
-    access_token = ConfirmitAuthenticate(site) 
+    access_token = ConfirmitAuthenticate(site)
+    if access_token == None:
+        return render_template('practice.html', result=["Authentication Token","NON-200: ERROR"])
     root = "https://ws." + site + ".confirmit.com" if site == "us" or site == "euro" or site == "nordic" else "https://ws.testlab.firmglobal.net"
-    path = "/v1/surveys/p827434659274"
+    path = "/v1/surveys"
     endpoint = root + path
     req = requests.get(endpoint, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     requestDesc = "GET " + endpoint + " using access token " + access_token
