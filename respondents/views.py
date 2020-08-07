@@ -43,7 +43,7 @@ def CreateSurveyResponse():
     email = request.form['email']
     if options is not None and email is not None:
         respValues = {"email": email, "options": options}
-        access_token = ConfirmitAuthenticate("testlab")
+        access_token = ConfirmitAuthenticate("us")
         req = requests.post('https://ws.us.confirmit.com/v1/surveys/p191045119335/respondents',
                          data = json.dumps(respValues),
                          headers = {"Content-Type": "application/json", "Accept": "application/json", "authorization": access_token}
