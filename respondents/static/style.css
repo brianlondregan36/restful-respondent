@@ -93,6 +93,7 @@ body {
 }
 .clientform__label {
   display:block;
+  padding-top:12px;
   padding-bottom:4px;
   font-weight:bold;
 }
@@ -154,10 +155,16 @@ body {
 
 
 .subsection {
-  flex-basis:30%;
+  flex-basis:40%;
   min-width:220px;
   margin-top:8px;
   margin-bottom:18px;
+  padding:10px;
+}
+.subsection img {
+  width:60%;
+  height:auto;
+  float:left;
   padding:10px;
 }
 .subsection__inner {

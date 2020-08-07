@@ -21,7 +21,7 @@ def PracticeWithActions(site):
     path = "/v1/surveys/?pageSize=1"
     endpoint = root + path
     req = requests.get(endpoint, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
-    requestDesc = "GET " + endpoint + " using access token " + access_token
+    requestDesc = "GET " + endpoint + " using access token " + access_token[0:50] + "..."
     responseDesc = str(req.status_code) + ": " + str(req.text)
     return render_template('practice.html', result=[requestDesc, responseDesc])
 
