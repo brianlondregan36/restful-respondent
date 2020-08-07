@@ -100,10 +100,11 @@
   function ValidateClientForm() {
     var data = {};
     var success = true;
+
     var input1 = document.getElementById("rdg1"); //validates the radio group
     var addClass1 = "clientform__radiogroup--error";
     var errorArea1 = document.getElementById("err1");
-    var node1 = CreateErrorMessage("Vestibulum massa libero");
+    var node1 = CreateErrorMessage("Please select an offering!");
     if(document.getElementsByClassName("clientform__radio--selected").length != 1) { //error conditions
       success = false;
       ToggleError(input1, addClass1, errorArea1, node1, true);
@@ -112,10 +113,11 @@
       data.options = document.getElementsByClassName("clientform__radio--selected")[0].getAttribute("data-options");
       ToggleError(input1, addClass1, errorArea1, node1, false);
     }
+
     var input2 = document.getElementById("txt1"); //validates the input box
     var addClass2 = "clientform__text--error";
     var errorArea2 = document.getElementById("err2");
-    var node2 = CreateErrorMessage("Nullam semper purus rhoncus tortor faucibus");
+    var node2 = CreateErrorMessage("Please enter your email address!");
     if(input2.value == "") { //error conditions
       success = false;
       ToggleError(input2, addClass2, errorArea2, node2, true);
@@ -124,12 +126,14 @@
       data.email = input2.value;
       ToggleError(input2, addClass2, errorArea2, node2, false);
     }
+
     if(success) {
       return data;
     }
     else {
       return null;
     }
+
     function ToggleError(input, classname, errorarea, errormsg, flag) { //add or remove aria and class
       if(flag == true) {
         input.classList.add(classname);
@@ -149,6 +153,7 @@
         }
       }
     }
+
     function CreateErrorMessage(msg) { //create a simple text node with the error message
       var node = document.createElement("p");
       var txt = document.createTextNode(msg);
