@@ -8,11 +8,27 @@ import base64, json, requests
 
 
 '''ROUTING''' 
+@app.route('/practice', methods=['GET'])
+def Practice():
+    return render_template('practice.html', result=["",""])
 
-@app.route('/', methods=['GET'])
+@app.route('/practice/<site>', methods=['GET'])
+def PracticeWithActions(site):
+    access_token = ConfirmitAuthenticate(site)
+    if access_token == None:
+        return render_template('practice.html', result=["Authentication Token", "NON-200: ERROR"])
+    root = "https://ws." + site + ".confirmit.com" if site == "us" or site == "euro" or site == "nordic" else "https://ws.testlab.firmglobal.net"
+    path = "/v1/surveys"
+    endpoint = root + path
+    req = requests.get(endpoint, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
+    requestDesc = "GET " + endpoint + " using access token " + access_token
+    responseDesc = str(req.status_code) + ": " + str(req.text)
+    return render_template('practice.html', result=[requestDesc, responseDesc])
+
+@app.route('/demo', methods=['GET'])
 def Index():
-    access_token = ConfirmitAuthenticate("testlab")
-    req = requests.get('https://ws.testlab.firmglobal.net/v1/surveys/p10210620', headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
+    access_token = ConfirmitAuthenticate("us")
+    req = requests.get('https://ws.us.confirmit.com/v1/surveys/p191045119335', headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     desc, result = None, ""
     if req.status_code == 200:
         respText = json.loads(req.text)
@@ -21,14 +37,14 @@ def Index():
         result = "Survey Description: " + desc
     return render_template('index.html', result=result)
 
-@app.route('/Response', methods=['POST'])
+@app.route('/response', methods=['POST'])
 def CreateSurveyResponse():
     options = request.form['options']
     email = request.form['email']
     if options is not None and email is not None:
         respValues = {"email": email, "options": options}
         access_token = ConfirmitAuthenticate("testlab")
-        req = requests.post('https://ws.testlab.firmglobal.net/v1/surveys/p10210620/respondents',
+        req = requests.post('https://ws.us.confirmit.com/v1/surveys/p191045119335/respondents',
                          data = json.dumps(respValues),
                          headers = {"Content-Type": "application/json", "Accept": "application/json", "authorization": access_token}
                          )
@@ -45,22 +61,6 @@ def CreateSurveyResponse():
         #client-side error
         return None
 
-@app.route('/practice', methods=['GET'])
-def Practice(): 
-    return render_template('practice.html', result=["",""])
-
-@app.route('/practice/<site>', methods=['GET'])
-def PracticeWithActions(site):
-    access_token = ConfirmitAuthenticate(site)
-    if access_token == None:
-        return render_template('practice.html', result=["Authentication Token","NON-200: ERROR"])
-    root = "https://ws." + site + ".confirmit.com" if site == "us" or site == "euro" or site == "nordic" else "https://ws.testlab.firmglobal.net"
-    path = "/v1/surveys"
-    endpoint = root + path
-    req = requests.get(endpoint, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
-    requestDesc = "GET " + endpoint + " using access token " + access_token
-    responseDesc = str(req.status_code) + ": " + str(req.text)
-    return render_template('practice.html', result=[requestDesc, responseDesc])
 
 
 

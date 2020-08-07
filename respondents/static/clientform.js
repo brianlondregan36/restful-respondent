@@ -75,7 +75,7 @@
       var over = document.getElementsByClassName("clientform__overlay")[0];
       over.style.display = "inherit";
       $.ajax({
-        url : "/Response",
+        url : "/response",
         type : 'POST',
         data : d,
         complete: function() {
