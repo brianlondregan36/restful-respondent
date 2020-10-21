@@ -17,9 +17,10 @@ def PracticeWithActions(site):
     access_token = ConfirmitAuthenticate(site)
     if access_token == None:
         return render_template('practice.html', result=["Authentication Token", "NON-200: ERROR"])
-    root = "https://ws." + site + ".confirmit.com" if site == "us" or site == "euro" or site == "nordic" else "https://ws.testlab.firmglobal.net"
-    path = "/v1/surveys/?pageSize=1"
-    endpoint = root + path
+    roots = {"us": "https://ws.us.confirmit.com", "euro": "https://ws.euro.confirmit.com", "nordic": "https://ws.nordic.confirmit.com", "testlab": "https://ws.testlab.firmglobal.net"}
+    surveys = {"us": "p906828863379", "euro": "p541738340723", "nordic": "p225996041761", "testlab": "p699313623649"}
+    path = "/v1/surveys/" + surveys[site]
+    endpoint = roots[site] + path
     req = requests.get(endpoint, headers = {"Content-Type": "application/x-www-form-urlencoded", "authorization": access_token})
     requestDesc = "GET " + endpoint + " using access token " + access_token[0:50] + "..."
     responseDesc = str(req.status_code) + ": " + str(req.text)
